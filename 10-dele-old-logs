@@ -1,0 +1,18 @@
+#!/bin/bash
+
+SOURCE_DIRECTORY=/tmp/app-log
+
+if [ -d $SOURCE_DIRECTORY ]
+  then
+    echo " directory file exits"
+  else
+    echo " directory files are not exits"
+    exit 1
+fi
+
+FILES=$(find $SOURCE_DIRECTORY -name "*.log" -mtime +14)
+ while IFS= read -r line
+  do
+   echo "Delete the log by $line"
+   rm -rf $line
+  done <<<$FILES
